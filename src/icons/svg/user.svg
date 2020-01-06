@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="18px" viewBox="0 0 17 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>账号登录</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="视界-账号密码登录2" transform="translate(-1092.000000, -554.000000)" fill-rule="nonzero">
+            <g id="登录" transform="translate(770.000000, 391.000000)">
+                <g id="账号登录" transform="translate(320.000000, 162.000000)">
+                    <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                    <path d="M12.625,10.25 C14.125,9.375 15.125,7.75 15.125,6 C15.125,3.25 12.875,1 10.125,1 C7.375,1 5.125,3.125 5.125,5.875 C5.125,7.75 6.125,9.25 7.625,10.125 C4.375,11.125 2.125,14.125 2,17.625 C2,18.125 2.25,18.375 2.625,18.375 C3,18.375 3.25,18.125 3.25,17.75 C3.375,14 6.375,11 10.125,11 C13.875,11 16.875,14 17,17.75 C17,18.125 17.25,18.375 17.625,18.375 C18,18.375 18.25,18.125 18.25,17.75 C18.125,14.25 15.875,11.25 12.625,10.25 Z M6.375,5.875 C6.375,3.75 8,2.125 10.125,2.125 C12.25,2.125 13.875,3.75 13.875,5.875 C13.875,8 12.25,9.625 10.125,9.625 C8,9.625 6.375,8 6.375,5.875 Z" id="形状" fill="#DCDCDC"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

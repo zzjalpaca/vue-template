@@ -5,6 +5,8 @@ import store from './store'
 // 引入element-ui
 import Element from 'element-ui'
 
+import '@/icons'
+
 Vue.config.productionTip = false
 
 Vue.use(Element, { size: 'mini', zIndex: 3000 })

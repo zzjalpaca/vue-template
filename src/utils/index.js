@@ -10,7 +10,7 @@ import _import from '@/router/_import' // 获取组件的方法
  * @param {string} cFormat
  * @returns {string}
  */
-export function parseTime (time, cFormat) {
+export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null
   }
@@ -53,7 +53,7 @@ export function parseTime (time, cFormat) {
  * @param {string} option
  * @returns {string}
  */
-export function formatTime (time, option) {
+export function formatTime(time, option) {
   if (('' + time).length === 10) {
     time = parseInt(time) * 1000
   } else {
@@ -95,7 +95,7 @@ export function formatTime (time, option) {
  * @param {string} url
  * @returns {Object}
  */
-export function param2Obj (url) {
+export function param2Obj(url) {
   const search = url.split('?')[1]
   if (!search) {
     return {}
@@ -114,7 +114,7 @@ export function param2Obj (url) {
 export const datePickerOptions = {
   shortcuts: [{
     text: '最近一周',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
@@ -122,7 +122,7 @@ export const datePickerOptions = {
     }
   }, {
     text: '最近一个月',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
@@ -130,7 +130,7 @@ export const datePickerOptions = {
     }
   }, {
     text: '最近三个月',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
@@ -142,7 +142,7 @@ export const datePickerOptions = {
 export const insightDatePickerOptions = {
   shortcuts: [{
     text: '最近一周',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
@@ -150,7 +150,7 @@ export const insightDatePickerOptions = {
     }
   }, {
     text: '最近一个月',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
@@ -158,14 +158,14 @@ export const insightDatePickerOptions = {
     }
   }, {
     text: '最近三个月',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
       picker.$emit('pick', [start, end])
     }
   }],
-  disabledDate: function (time) {
+  disabledDate: function(time) {
     return time.getTime() > Date.now() - 86400000
   }
 }
@@ -173,19 +173,19 @@ export const insightDatePickerOptions = {
 export const monthPickerOptions = {
   shortcuts: [{
     text: '本月',
-    onClick (picker) {
+    onClick(picker) {
       picker.$emit('pick', [new Date(), new Date()])
     }
   }, {
     text: '今年至今',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date(new Date().getFullYear(), 0)
       picker.$emit('pick', [start, end])
     }
   }, {
     text: '最近六个月',
-    onClick (picker) {
+    onClick(picker) {
       const end = new Date()
       const start = new Date()
       start.setMonth(start.getMonth() - 6)
@@ -195,69 +195,20 @@ export const monthPickerOptions = {
 }
 
 // 饼图配置
-export function pieSettings (radius = 70, offsetY = 240) {
+export function pieSettings(radius = 70, offsetY = 240) {
   return {
     limitShowNum: 8,
     radius,
     offsetY,
     label: {
       position: 'inner',
-      // textStyle: {
-      //   fontWeight: 300,
-      //   fontSize: 12 // 文字的字体大小
-      // },
       formatter: '{d}%'
-      // formatter: '{b} {d}%'
     }
-    // tooltip: {
-    //   show: false,
-    //   formatter: '{a} < br/>{b} : {c}'
-    // }
   }
 }
-// export const pieSettings = {
-//   limitShowNum: 5,
-//   radius: 40,
-//   itemStyle: {
-//     center: ['20%', '10%']
-//   },
-//   label: {
-//     show: true,
-//     position: 'inside',
-//     normal: {
-//       formatter: '{a|{d}%}\n{b|{b}}',
-//       borderWidth: 0,
-//       borderRadius: 4,
-//       padding: [0, -70],
-//       rich: {
-//         a: {
-//           color: '#333',
-//           fontSize: 14,
-//           lineHeight: 20
-//         },
-//         hr: {
-//           borderColor: '#333',
-//           width: '100%',
-//           borderWidth: 0.5,
-//           height: 0
-//         },
-//         b: {
-//           fontSize: 12,
-//           lineHeight: 20,
-//           color: '#333'
-//         }
-//       }
-//     }
-//   },
-//   labelLine: {
-//     show: true,
-//     length: 10,
-//     length2: 80
-//   }
-// }
 
 // 对象转换为数组
-export function objectToArray (object) {
+export function objectToArray(object) {
   let array = []
   for (const key in object) {
     array.push({
@@ -268,8 +219,12 @@ export function objectToArray (object) {
   return array
 }
 
-// 导出excel 处理
-export function handleExportExcel (list, titles) {
+/**
+ * 导出excel 处理
+ * @param {(Array)} list
+ * @param {Object} titles 表头，中英文对应
+ */
+export function handleExportExcel(list, titles) {
   import('@/vendor/Export2Excel').then(excel => {
     if (list && list.length > 0) {
       let tHeader = Object.keys(list[0])
@@ -297,7 +252,7 @@ export function handleExportExcel (list, titles) {
   })
 }
 
-function formatJson (tHeader, list) {
+function formatJson(tHeader, list) {
   return list.map(v => tHeader.map(j => {
     console.log(v[j])
     return v[j] - 0 ? v[j] - 0 : v[j]
@@ -309,7 +264,7 @@ function formatJson (tHeader, list) {
  * @param routes asyncRoutes
  * @param roles
  */
-export function filterAsyncRoutes (routerlist) {
+export function filterAsyncRoutes(routerlist) {
   const router = []
   routerlist.forEach(item => {
     let path = item.id === '3' || item.id === '2' || item.id === '4' || item.id === '5' ? '/' : ''
@@ -343,7 +298,7 @@ export function filterAsyncRoutes (routerlist) {
 }
 
 // 环比
-export function relativeRadio (value) {
+export function relativeRadio(value) {
   let val = parseFloat(value)
   if (isNaN(val)) {
     return value
@@ -358,6 +313,6 @@ export function relativeRadio (value) {
 }
 
 // 折线图判断是否为空数据
-export function isEmpty (val) {
+export function isEmpty(val) {
   return val && val.rows && val.rows.length === 0
 }

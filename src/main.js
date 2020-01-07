@@ -5,6 +5,8 @@ import store from './store'
 // 引入element-ui
 import Element from 'element-ui'
 
+import '@/styles/index.scss' // global css
+
 import '@/icons'
 
 Vue.config.productionTip = false

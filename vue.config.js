@@ -23,7 +23,7 @@ const outputDir = `../../../../trunk/assets/app/vue/see-edata`
 module.exports = {
   // publicPath: `${rootDomain}/assets/app/vue/see-edata`,
   publicPath: rootDomain,
-  // outputDir, // 打包输出路径
+  outputDir, // 打包输出路径
   assetsDir: 'static', // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
   lintOnSave: environment === 'development', // 是否在开发环境下通过 eslint-loader 在每次保存时 lint 代码
   productionSourceMap: false,

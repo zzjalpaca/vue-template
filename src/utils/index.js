@@ -229,7 +229,6 @@ export function handleExportExcel(list, titles) {
     if (list && list.length > 0) {
       let tHeader = Object.keys(list[0])
       const data = formatJson(tHeader, list)
-      console.log(data)
       let tHeaderCn = []
       if (titles) {
         tHeaderCn = tHeader.map(item => {

@@ -1,80 +1,61 @@
-/* eslint-disable prefer-promise-reject-errors */
-import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
+import Cookies from 'js-cookie'
 import { resetRouter } from '@/router'
+import Vue from 'vue'
 
-const getDefaultState = () => {
-  return {
-    token: getToken(),
-    name: '',
-    avatar: ''
-  }
+const state = {
+  token: getToken().userId,
+  name: '',
+  avatar: ''
 }
 
-const state = getDefaultState()
-
 const mutations = {
-  RESET_STATE: (state) => {
-    Object.assign(state, getDefaultState())
-  },
   SET_TOKEN: (state, token) => {
     state.token = token
-  },
-  SET_NAME: (state, name) => {
-    state.name = name
-  },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
   }
 }
 
 const actions = {
-  // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { mobile, username, password, code, verifycode } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
-
-        if (!data) {
-          reject('Verification failed, please Login again.')
+      Vue.jsonp(process.env.VUE_APP_LOGIN_API + '/api/user/blogin',
+        {
+          user_name: username.trim() || mobile,
+          passwd: password,
+          code,
+          verifycode,
+          appid: 30004
         }
-
-        const { name, avatar } = data
-
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
+      ).then(res => {
+        resolve(res)
+      }).catch(err => {
+        console.log(err)
       })
     })
   },
 
-  // user logout
-  logout({ commit, state }) {
+  logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
+      let { userId, token, sessionId } = getToken()
+      console.log(userId, token, sessionId)
+      Vue.jsonp(process.env.VUE_APP_LOGIN_API + '/api/sso/sso_logout',
+        {
+          user_id: userId,
+          token,
+          session_id: sessionId
+        }
+      ).then(res => {
+        if (res.code === 1000) {
+          console.log('ok')
+          Cookies.remove('B_UID', { path: '/', domain: '.leju.com' })
+          dispatch('permission/resetRouter', [], { root: true })
+          removeToken()
+          resetRouter()
+          resolve()
+        }
+      }).catch(err => {
+        console.log(err)
       })
     })
   },
@@ -82,8 +63,8 @@ const actions = {
   // remove token
   resetToken({ commit }) {
     return new Promise(resolve => {
-      removeToken() // must remove  token  first
-      commit('RESET_STATE')
+      commit('SET_TOKEN', '')
+      removeToken()
       resolve()
     })
   }

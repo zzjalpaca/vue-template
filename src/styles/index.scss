@@ -4,12 +4,20 @@
 @import './element-ui.scss';
 @import './sidebar.scss';
 
+:root {
+  --down-color: #30b08f;
+  --up-color: red;
+  --padding: 40px;
+  --header-height: 60px;
+}
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  margin: 0;
 }
 
 label {
@@ -59,7 +67,30 @@ div:focus {
   }
 }
 
-// main-container global css
-.app-container {
-  padding: 20px;
+// 筛选栏
+.app-filter {
+  padding: 20px var(--padding) 30px;
+  background: #F9F9F9;
+}
+
+.app-title {
+  height: 28px;
+  line-height: 28px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.app-content {
+  padding: 20px var(--padding);
+}
+
+.app-filter .el-form-item {
+  margin-bottom: 15px;
+}
+
+.navbar {
+  height: var(--header-height) !important;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
 }

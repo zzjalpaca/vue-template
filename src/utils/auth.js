@@ -6,7 +6,8 @@ const TokenKey3 = 'B_PHPSESSID'
 
 export function getToken() {
   return {
-    userId: Cookies.get(TokenKey1),
+    userId: 2324,
+    // userId: Cookies.get(TokenKey1),
     token: Cookies.get(TokenKey2),
     sessionId: Cookies.get(TokenKey3)
   }

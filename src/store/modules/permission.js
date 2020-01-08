@@ -21,7 +21,6 @@ const actions = {
         let accessedRoutes = filterAsyncRoutes(res.entry)
         // 默认跳转路径
         let firstAccessUrl = res.entry[0].child_list[0].child_list[0].url_complete
-        console.log(accessedRoutes, 111)
         accessedRoutes.push({
           path: '/',
           redirect: firstAccessUrl
@@ -31,7 +30,6 @@ const actions = {
         resolve(accessedRoutes)
       })
     })
-    // commit('SET_ROUTES', [])
   },
   resetRouter({ commit }, routes) {
     commit('SET_ROUTES', routes)

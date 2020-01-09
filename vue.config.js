@@ -30,7 +30,7 @@ module.exports = {
   devServer: {
     port: port,
     disableHostCheck: true,
-    host: 'mytest.dev.leju.com',
+    // host: 'mytest.dev.leju.com',
     open: true, // Set it to true to open your default browser.
     // Shows a full-screen overlay in the browser when there are compiler errors or warnings. Disabled by default. If you want to show only compiler errors:
     overlay: {

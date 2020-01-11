@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
+    <navbar-top/>
     <div class="right-menu">
       <div @click="logout" class="log-out">
         <span class="svg-container">
@@ -16,10 +16,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
+import NavbarTop from './NavbarTop'
 
 export default {
   components: {
-    Hamburger
+    Hamburger,
+    NavbarTop
   },
   computed: {
     ...mapGetters([

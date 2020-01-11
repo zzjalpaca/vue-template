@@ -1,48 +1,26 @@
 <template>
   <div v-if="!item.hidden" class="menu-wrapper">
-
-    <!-- 没有子菜单的 -->
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-      <app-link :to="resolvePath(onlyOneChild.path)">
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||item.meta.icon" :title="onlyOneChild.meta.title" />
+          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
         </el-menu-item>
       </app-link>
     </template>
 
-    <!-- 有子菜单的 -->
     <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template slot="title">
-        <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title" />
+        <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
       </template>
-
       <sidebar-item
         v-for="child in item.children"
+        :key="child.path"
         :is-nest="true"
         :item="child"
-        :key="child.path"
         :base-path="resolvePath(child.path)"
-        class="nest-menu" />
-
-        <!-- <template v-for="child in item.children">
-        <template v-if="!child.hidden">
-          <sidebar-item
-            v-if="child.children&&child.children.length>0"
-            :is-nest="true"
-            :item="child"
-            :key="child.path"
-            :base-path="resolvePath(child.path)"
-            class="nest-menu" />
-
-          <app-link v-else :to="resolvePath(child.path)" :key="child.name">
-            <el-menu-item :index="resolvePath(child.path)">
-              <item v-if="child.meta" :icon="child.meta.icon" :title="generateTitle(child.meta.title)" />
-            </el-menu-item>
-          </app-link>
-        </template>
-      </template> -->
+        class="nest-menu"
+      />
     </el-submenu>
-
   </div>
 </template>
 
@@ -73,9 +51,8 @@ export default {
     }
   },
   data() {
-    // return {
-    //   onlyOneChild: null
-    // }
+    // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
+    // TODO: refactor with render function
     this.onlyOneChild = null
     return {}
   },
@@ -107,6 +84,9 @@ export default {
     resolvePath(routePath) {
       if (isExternal(routePath)) {
         return routePath
+      }
+      if (isExternal(this.basePath)) {
+        return this.basePath
       }
       return path.resolve(this.basePath, routePath)
     }

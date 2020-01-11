@@ -61,6 +61,7 @@ export const constantRoutes = [
   {
     path: '/form',
     component: Layout,
+    meta: { title: 'form', icon: 'form' },
     children: [
       {
         path: 'index',

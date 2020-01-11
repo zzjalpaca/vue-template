@@ -13,7 +13,8 @@
         unique-opened
         mode="vertical"
       >
-        <sidebar-item v-for="route in permissionRoutes" :key="route.path" :item="route" :base-path="route.path" />
+        <!-- <sidebar-item v-for="route in permissionRoutes" :key="route.path" :item="route" :base-path="route.path" /> -->
+      <sidebar-item v-for="route in navMenu" :key="route.path" :item="route" :base-path="route.path"/>
       </el-menu>
     </el-scrollbar>
   </div>
@@ -30,7 +31,8 @@ export default {
   computed: {
     ...mapGetters([
       'permissionRoutes',
-      'sidebar'
+      'sidebar',
+      'navMenu'
     ]),
     activeMenu() {
       const route = this.$route

@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-07 14:54:32
+ * @LastEditTime: 2020-01-11 16:02:22
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /vue-ui/vue-template/src/layout/index.vue
+ -->
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
